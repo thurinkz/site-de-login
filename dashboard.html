@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dashboard-wrapper">
+
+  <header class="topbar">
+  <div class="brand">👨🏻‍💻 Meu primeiro site de login</div>
+    <div class="user-info">
+      <div class="avatar">🥷🏻</div>
+      <span id="userName">Carregando...</span>
+      <button class="btn-logout" id="btnLogout">Sair</button>
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    <div class="welcome-card">
+      <h2 id="welcomeMsg">olá Seja Bem-vindo!</h2>
+      <p id="welcomeSub">Você foi logado com sucesso</p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📋</div>
+        <div class="stat-value">777</div>
+        <div class="stat-label">Relatórios</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value">10</div>
+        <div class="stat-label">Usuários</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏗️✅</div>
+        <div class="stat-value">1</div>
+        <div class="stat-label">Projetos feitos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏗️</div>
+        <div class="stat-value">1</div>
+        <div class="stat-label">Projetos</div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    
+    const session = sessionStorage.getItem('loggedUser');
+    if (!session) {
+      window.location.href = 'index.html';
+    } else {
+      const user = JSON.parse(session);
+      document.getElementById('userName').textContent = user.name;
+      document.getElementById('welcomeMsg').textContent = `Olá, ${user.name}! 👋`;
+      document.getElementById('welcomeSub').textContent =
+        `Você foi logado com sucesso como ${user.name}`;
+    }
+
+
+    document.getElementById('btnLogout').addEventListener('click', () => {
+      sessionStorage.removeItem('loggedUser');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
